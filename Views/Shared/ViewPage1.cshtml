@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>GetfIT</title>
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="gym">
+    <meta name="keywords" content="gym getfit">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+    <!-- Resource style -->
+    <link rel="stylesheet" href="~/Content/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+    <!-- Resource style -->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title GetfIT </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @Html.ActionLink("GetfIT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    </div>
+                    <div class="navbar-collapse collapse " id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav">
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Poèetna", "Index", "Admin")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Poèetna", "Index", "Home")
+                                }
+                            </li>
+                            <li>@Html.ActionLink("O nama", "About", "Home")</li>
+                            <li>@Html.ActionLink("Kontakt", "Contact", "Teretanas")</li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Direktor") || User.IsInRole("Racunovodja"))
+                                    {
+                                        @Html.ActionLink("Uplate/Isplate", "Index", "UplataIsplatas")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+                                    {
+                                        @Html.ActionLink("Teretane", "Index", "Teretanas")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Role", "Index", "Role")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("IT strucnjak") || User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Korisnici", "Index", "Korisniks")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("IT strucnjak") || User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Zaposlenici", "Index", "Zaposleniks")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Korisnik") || User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+                                    {
+                                        @Html.ActionLink("Treneri", "Treneri", "Home")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Korisnik") || User.IsInRole("Admin") || User.IsInRole("IT strucnjak") || User.IsInRole("Trener"))
+                                    {
+                                        @Html.ActionLink("Raspored treninga", "Trening", "Home")
+                                    }
+                                }
+                            </li>
+
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+
+                <div class="main app form" id="main">
+             
+                </div>
+
+                <!-- Scroll To Top -->
+
+                <a id="back-top" class="back-to-top page-scroll" href="#main"> <i class="ion-ios-arrow-thin-up"></i> </a>
+
+                <!-- Scroll To Top Ends-->
+
+            </div>
+            <!-- Main Section -->
+        </div>
+        <!-- Wrapper-->
+        <!-- Jquery and Js Plugins -->
+        <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Content/js/plugins.js"></script>
+        <script type="text/javascript" src="~/Content/js/menu.js"></script>
+        <script type="text/javascript" src="~/Content/js/custom.js"></script>
+        <script src="js/jquery.subscribe.js"></script>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BY TEAM ŠINA</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,464 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>GetfIT</title>
+    <link rel="icon" href="~/Content/images/favicon.png" type="image/png" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="gym">
+    <meta name="keywords" content="gym getfit">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/css/animate.css">
+    <!-- Resource style -->
+    <link rel="stylesheet" href="~/Content/owl.carousel.css">
+    <link rel="stylesheet" href="~/Content/css/owl.theme.css">
+    <link rel="stylesheet" href="~/Content/css/ionicons.min.css">
+    <!-- Resource style -->
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title GetfIT </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    @Html.ActionLink("GetfIT", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    <div class="navbar-collapse collapse " id="bs-example-navbar-collapse-1">
+
+                        <ul class="nav navbar-nav">
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Početna", "Index", "Admin")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Početna", "Index", "Home")
+                                }
+                            </li>
+                            <li>@Html.ActionLink("O nama", "About", "Home")</li>
+                            <li>@Html.ActionLink("Kontakt", "Contact", "Teretanas")</li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Direktor") || User.IsInRole("Racunovodja"))
+                                    {
+                                        @Html.ActionLink("Uplate/Isplate", "Index", "UplataIsplatas")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+                                    {
+                                        @Html.ActionLink("Teretane", "Index", "Teretanas")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Role", "Index", "Role")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("IT strucnjak") || User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Korisnici", "Index", "Korisniks")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("IT strucnjak") || User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Zaposlenici", "Index", "Zaposleniks")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Korisnik") || User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+                                    {
+                                        @Html.ActionLink("Treneri", "Treneri", "Home")
+                                    }
+                                }
+                            </li>
+                            <li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    if (User.IsInRole("Korisnik") || User.IsInRole("Admin") || User.IsInRole("IT strucnjak") || User.IsInRole("Trener"))
+                                    {
+                                        @Html.ActionLink("Raspored treninga", "Trening", "Home")
+                                    }
+                                }
+                            </li>
+
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+            <div class="container body-content">
+                @RenderBody()
+
+                <div class="main app form" id="main">
+                    <!-- Main Section-->
+                    <div class="hero-section">
+                        <div class="container nopadding">
+                            <div class="col-md-12">
+                                <div class="hero-content text-center">
+                                    <h1 class="wow fadeInUp" data-wow-delay="0.1s">GetfIT</h1>
+                                    <p class="wow fadeInUp" data-wow-delay="0.2s"> It's not a membership. It's a lifestyle. </p>
+                                    <a href=# font-size="40dp " class="btn btn-action wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">@Html.ActionLink("Prijavi se već danas", "Register", "Account")</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Classes Section -->
+                    <div class="pitch text-center" id="classes">
+                        <div class="container">
+                            <div class="pitch-intro">
+                                <h1 class="wow fadeInDown" data-wow-delay="0.2s">OSTVARITE SVOJE TIJELO IZ SNOVA S NAMA</h1>
+                                <p class="wow fadeInDown" data-wow-delay="0.2s">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan.</p>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-checkmark-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>Personalni Trening</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-mic-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>Cardio Trening</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-folder-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>YOGA</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-folder-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>Plan ishrane</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-folder-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>Kružni trening</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="pitch-icon"> <i class="ion-ios-folder-outline"></i> </div>
+                                    <div class="pitch-content">
+                                        <h1>Crossfit</h1>
+                                        <p> Aliquam vel euismod elit, sed suscipit est. Sed tincidunt venenatis ligula ac luctus. Fusce egestas volutpat mi sed pellentesque. </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Features Section -->
+                    <div class="app-features text-center" id="features">
+                        <div class="container">
+                            <h1 class="wow fadeInDown" data-wow-delay="0.1s">OSTVARITE SVE ŠTO POŽELITE</h1>
+                            <p class="wow fadeInDown" data-wow-delay="0.2s">
+                                Aliquam sagittis ligula et sem lacinia, ut facilisis enim sollicitudin. Proin nisi est,<br class="hidden-xs">
+                                convallis nec purus vitae, iaculis posuere sapien.
+                            </p>
+                            <div class="col-md-4 features-left text-right">
+
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.2s">
+                                    <div class="icon"> <i class="ion-ios-list-outline"></i> </div>
+                                    <div class="feature-single">
+                                        <p>Will create a plan that’s tailored to your situation and create your everyday nutrition strategies.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.3s">
+                                    <div class="icon"> <i class="ion-ios-speedometer-outline"></i> </div>
+                                    <div class="feature-single">
+                                        <p>Bring to the table win-win survival strategies to ensure proactive domination.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.4s">
+                                    <div class="icon"> <i class="ion-ios-pulse"></i> </div>
+                                    <div class="feature-single">
+                                        <p>Will create a plan that’s tailored to your situation and create your everyday nutrition strategies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 wow fadeInDown" data-wow-delay="0.5s"> <img class="img-responsive" src="~/Content/images/iPhone-app.png" alt="App" /> </div>
+                            <div class="col-md-4 features-left text-left">
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.6s">
+                                    <div class="icon"> <i class="ion-ios-americanfootball-outline"></i> </div>
+                                    <div class="feature-single">
+                                        <p> Bring to the table win-win survival strategies to ensure proactive domination.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.7s">
+                                    <div class="icon"> <i class="ion-ios-heart-outline"></i> </div>
+                                    <div class="feature-single">
+                                        <p>Bring to the table win-win survival strategies to ensure proactive domination.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 wow fadeInDown" data-wow-delay="0.8s">
+                                    <div class="icon"> <i class="ion-ios-analytics-outline"></i> </div>
+                                    <div class="feature-single">
+                                        <p>Will create a plan that’s tailored to your situation and create your everyday nutrition strategies.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Split Feature1 Section -->
+                    <div class="split-features">
+                        <div class="col-md-6 nopadding">
+                            <div class="split-image"> <img class="img-responsive wow fadeIn" src="~/Content/images/app_image.png" alt="Image" /> </div>
+                        </div>
+                        <div class="col-md-6 nopadding">
+                            <div class="split-content">
+                                <h1 class="wow fadeInUp">
+                                    Održavajte svoje tijelo snažno za duži<br>
+                                    i bolji život
+                                </h1>
+                                <p class="wow fadeInUp"> Pellentesque eget dolor gravida, tempus purus ac, ultricies mauris. Etiam est nisl, molestie sed egestas bibendum, varius eu diam. Suspendisse est metus, ultrices sit amet dolor in, rhoncus malesuada mi.</p>
+                                <ul class="wow fadeInUp">
+                                    <li>Nulla ornare purus non consequat ultricies.</li>
+                                    <li>Etiam est nisl, molestie sed egestas bibendum</li>
+                                    <li>Aliquam vel euismod elit, sed suscipit est.</li>
+                                    <li>Curabitur egestas justo neque viverra vel. </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Split Feature2 Section -->
+                    <div class="split-features2">
+                        <div class="col-md-6 nopadding">
+                            <div class="split-content second">
+                                <h1 class="wow fadeInUp">Vidjet ćete rezultate i osjetiti razliku</h1>
+                                <p class="wow fadeInUp"> Pellentesque eget dolor gravida, tempus purus ac, ultricies mauris. Etiam est nisl, molestie sed egestas bibendum, varius eu diam. Suspendisse est metus, ultrices sit amet dolor in, rhoncus malesuada mi.</p>
+                                <ul class="wow fadeInUp">
+                                    <li>Nulla ornare purus non consequat ultricies.</li>
+                                    <li>Etiam est nisl, molestie sed egestas bibendum</li>
+                                    <li>Aliquam vel euismod elit, sed suscipit est.</li>
+                                    <li>Curabitur egestas justo neque viverra vel. </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6 nopadding">
+                            <div class="split-image"> <img class="img-responsive wow fadeIn" src="~/Content/images/app_image2.png" alt="Image" /> </div>
+                        </div>
+                    </div>
+                    <!-- Split Feature3 Section -->
+                    <div class="split-features">
+                        <div class="col-md-6 nopadding">
+                            <div class="split-image"> <img class="img-responsive wow fadeIn" src="~/Content/images/gym-3.jpg" alt="Image" /> </div>
+                        </div>
+                        <div class="col-md-6 nopadding">
+                            <div class="split-content">
+                                <h1 class="wow fadeInUp">
+                                    Vi to zaslužujete
+                                </h1>
+                                <p class="wow fadeInUp"> Pellentesque eget dolor gravida, tempus purus ac, ultricies mauris. Etiam est nisl, molestie sed egestas bibendum, varius eu diam. Suspendisse est metus, ultrices sit amet dolor in, rhoncus malesuada mi.</p>
+                                <ul class="wow fadeInUp">
+                                    <li>Nulla ornare purus non consequat ultricies.</li>
+                                    <li>Etiam est nisl, molestie sed egestas bibendum</li>
+                                    <li>Aliquam vel euismod elit, sed suscipit est.</li>
+                                    <li>Curabitur egestas justo neque viverra vel. </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Bold call to action Section -->
+                    <div class="feature-sub">
+                        <div class="container">
+                            <div class="sub-inner">
+                                <h1 class="wow fadeInUp">Trenirajte sa nama i osjećajte se fantastično!</h1>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Client Section -->
+                    <div class="review-section" id="review">
+                        <div class="container">
+                            <h1>
+                                ŠTA NAŠI KORISNICI KAŽU O NAMA:
+                            </h1>
+                            <div class="col-md-10 col-md-offset-1" font-size="30dp">
+
+                                <div class="reviews owl-carousel owl-theme">
+
+                                    <div class="review-single">
+                                        <div class="review-text wow fadeInUp" data-wow-delay="0.2s">
+                                            <h3>Mirza Ridžal<br />Zabavljač</h3>
+                                        </div>
+                                    </div>
+                                    <div class="review-single">
+
+                                        <img class="img-circle" src="~/Content/images/mirza.png" alt="Client Testimonoal" />
+                                        <div class="review-text wow fadeInUp" data-wow-delay="0.2s">
+                                            <p>
+                                                Morbi eget dictum enim. Praesent sed quam sit amet lorem tempor rhoncus. <br>
+                                                In hac habitasse platea dictumst. Vivamus in accumsan ex
+                                            </p>
+                                            <h3>Belmin Korjenić<br />Web developer</h3>
+                                        </div>
+                                    </div>
+                                    <div class="review-single">
+                                        <img class="img-circle" src="~/Content/images/bela.png" alt="Client Testimonoal" />
+                                        <div class="review-text">
+                                            <p>
+                                                Morbi eget dictum enim. Praesent sed quam sit amet lorem tempor rhoncus. <br>
+                                                In hac habitasse platea dictumst. Vivamus in accumsan ex
+                                            </p>
+
+                                            <h3>Ema Mandal<br />Dizajnerica</h3>
+                                        </div>
+                                    </div>
+                                    <div class="review-single">
+                                        <img class="img-circle" src="~/Content/images/ema.png" alt="Client Testimonoal" />
+                                        <div class="review-text">
+                                            <p>
+                                                Morbi eget dictum enim. Praesent sed quam sit amet lorem tempor rhoncus. <br>
+                                                In hac habitasse platea dictumst. Vivamus in accumsan ex
+                                            </p>
+                                            <h3>Irhad Šarić<br />Pjevač</h3>
+                                        </div>
+                                    </div>
+                                    <div class="review-single">
+
+                                        <img class="img-circle" src="~/Content/images/irhad.png" alt="Client Testimonoal" />
+                                        <div class="review-text">
+                                            <p>
+                                                Morbi eget dictum enim. Praesent sed quam sit amet lorem tempor rhoncus. <br>
+                                                In hac habitasse platea dictumst. Vivamus in accumsan ex
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Subscribe Form -->
+                    <div class="cta-sub no-color">
+                        <div class="container">
+                            <div class="cta-inner">
+                                <h1 class="wow fadeInUp" data-wow-delay="0s">Ukoliko želite primati e-mailove o zdravom načinu života:</h1>
+                                <p class="wow fadeInUp" data-wow-delay="0.2s">
+                                    Unesite svoj e-mail:
+                                </p>
+                                <div class="form wow fadeInUp" data-wow-delay="0.3s">
+                                    <form class="subscribe-form center-form wow zoomIn" action="php/subscribe.php" method="post" name="subscribeform" id="subscribeform">
+                                        <input class="mail" type="email" name="email" placeholder="Join the wait list" autocomplete="off" id="subemail">
+                                        <input class="submit-button" type="submit" value="Subscribe" name="send" id="subsubmit">
+                                    </form>
+                                    <!-- subscribe message -->
+                                    <div id="mesaj"></div>
+                                    <!-- subscribe message -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Section -->
+                    <div class="footer" id="contact">
+                        <div class="container">
+                            <div class="col-md-6 contact">
+                                <h1>O našim trenerima:</h1>
+                                <p>
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, <br>
+                                    vel illum dolore eu feugiat nulla facilisis at vero Duis autem vel eum iriure dolor in <br>
+                                    hendrerit in vulputate velit esse eros et accumsan.
+                                </p>
+                                <p>
+                                    Pellentesque eget dolor gravida, tempus purus ac, ultricies mauris. Etiam est nisl,<br>
+                                    molestie sed egestas bibendum, varius eu diam.
+                                </p>
+                            </div>
+                            <div class="col-md-3 contact footer-menu">
+                                <h1>Pronađite nas na društvenim mrežama</h1>
+                                <ul>
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Twitter</a></li>
+                                    <li><a href="#">Github</a></li>
+                                    <li><a href="#">Pinterest</a></li>
+                                    <li><a href="#">Google Plus</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-3 contact">
+                                <h1>Kontaktirajte nas</h1>
+                                <p> Na raspolaganju smo Vam 24 sata sedmično, ukoliko Vam treba savjet o zdravoj prehrani ili treningu! </p>
+                                <a href="mailto:support@gmail.com">šina@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scroll To Top -->
+
+                <a id="back-top" class="back-to-top page-scroll" href="#main"> <i class="ion-ios-arrow-thin-up"></i> </a>
+
+                <!-- Scroll To Top Ends-->
+
+            </div>
+            <!-- Main Section -->
+        </div>
+        <!-- Wrapper-->
+        <!-- Jquery and Js Plugins -->
+        <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
+        <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Content/js/plugins.js"></script>
+        <script type="text/javascript" src="~/Content/js/menu.js"></script>
+        <script type="text/javascript" src="~/Content/js/custom.js"></script>
+        <script src="js/jquery.subscribe.js"></script>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BY TEAM ŠINA</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<getfitEF.Models.Teretana>
+
+@{
+    ViewBag.Title = "hehe";
+}
+@{
+    Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+<br />
+<br />
+<br />
+<h2>Kontakti naših teretana</h2>
+
+
+<hr />
+
+@foreach (var item in Model)
+{
+    <p><b>Naziv:</b> @Html.DisplayFor(modelItem => item.SifTeretana.Naziv)</p>
+    <p><b>Adresa:</b> @Html.DisplayFor(modelItem => item.Adresa)</p>
+    <p><b>Kapacitet:</b> @Html.DisplayFor(modelItem => item.Kapacitet)</p>
+    <p><b>Telefon:</b> @Html.DisplayFor(modelItem => item.Telefon)</p>
+    <hr />
+}
+

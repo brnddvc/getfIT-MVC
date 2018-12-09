@@ -1,0 +1,23 @@
+﻿@*@model Microsoft.AspNet.Identity.EntityFramework.IdentityUser*@
+@{
+    ViewBag.Title = "AssignRoleToUser";
+}
+@{
+    Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+<br />
+<br />
+<br />
+
+<h2>Dodijeli rolu korisniku</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.Label("Izaberite korisnika", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownList("UserName")
+        </div>
+    </div>
+    <input type="submit" value="Kreiraj rolu" />
+}

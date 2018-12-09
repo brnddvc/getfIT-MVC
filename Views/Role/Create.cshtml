@@ -1,0 +1,30 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Create";
+}
+@{
+    Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+<br />
+<br />
+<br />
+<h2>Kreiranje</h2>
+
+<style type="text/css">
+    #tbrole, .c {
+        border: double;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td class="c">Unesi ime role za kreiranje:</td>
+            <td class="c">
+                @Html.EditorFor(m => m.Name)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Kreiraj rolu" />
+}

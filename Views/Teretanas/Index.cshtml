@@ -1,0 +1,70 @@
+﻿@model IEnumerable<getfitEF.Models.Teretana>
+
+@{
+    ViewBag.Title = "Teretane";
+}
+
+@{
+    Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+<br />
+<br />
+<br />
+<h2>Teretane</h2>
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+        {
+            @Html.ActionLink("Create New", "Create")
+        }
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SifTeretana.Naziv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Adresa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Kapacitet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefon)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SifTeretana.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kapacitet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefon)
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                if (User.IsInRole("Admin") || User.IsInRole("IT strucnjak"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+                    </td>
+                }
+            }
+        </tr>
+    }
+</table>

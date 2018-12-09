@@ -1,0 +1,55 @@
+﻿@model getfitEF.Models.UplataIsplata
+
+@{
+    ViewBag.Title = "Details";
+}
+@{
+    Layout = "~/Views/Shared/ViewPage1.cshtml";
+}
+<br />
+<br />
+<br />
+<h2>Details</h2>
+
+<div>
+    <h4>UplataIsplata</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SifGodina.Sifra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SifGodina.Sifra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SifMjesec.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SifMjesec.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Uplata)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Uplata)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Isplata)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Isplata)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
